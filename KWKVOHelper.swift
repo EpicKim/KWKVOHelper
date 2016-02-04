@@ -13,6 +13,10 @@ extension NSObject {
         self.addObserver(KWKVOMananger.sharedInstance, forKeyPath: keypath, options: .New, context: nil)
         KWKVOMananger.sharedInstance.add(keypath, closure: closure, object: self.classForCoder)
     }
+    
+    func removeObserver(keypath: String) {
+        KWKVOMananger.sharedInstance.remove(keypath)
+    }
 }
 
 public class KWKVOObject : NSObject {
@@ -41,6 +45,13 @@ public class KWKVOMananger : NSObject  {
         newObject.keyPath = keyPath
         newObject.objectClass = object
         self.kvoObjects.addObject(newObject)
+    }
+    
+    public func remove(keyPath: String) {
+        let predicate = NSPredicate(format: "keyPath=%@", keyPath)
+        let filteredArray = self.kvoObjects.filteredArrayUsingPredicate(predicate)
+        let kvoObject = filteredArray.first as! KWKVOObject
+        self.kvoObjects.removeObject(kvoObject)
     }
     
     override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {

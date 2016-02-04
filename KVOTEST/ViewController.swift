@@ -29,6 +29,8 @@ class SSViewController: UIViewController {
         two = 12141
         two = 32414
         two = 414141
+        
+        self.removeObserver("test")
     }
 
     override func didReceiveMemoryWarning() {
