@@ -59,7 +59,11 @@ public class KWKVOMananger : NSObject  {
         let predicate = NSPredicate(format: "keyPath=%@", keyPath!)
         let filteredArray = self.kvoObjects.filteredArrayUsingPredicate(predicate)
         
-        let kvoObject = filteredArray.first as! KWKVOObject
-        kvoObject.closure()
+        for tmp in filteredArray {
+            let kvoObject = tmp as! KWKVOObject
+            if((object?.isKindOfClass(kvoObject.objectClass!)) != nil) {
+                kvoObject.closure()
+            }
+        }
     }
 }

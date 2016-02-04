@@ -19,9 +19,9 @@ class SSViewController: UIViewController {
             print(self.test)
         })
 
-        self.observe("two", closure: { () -> Void in
-            print(self.two)
-        })
+//        self.observe("two", closure: { () -> Void in
+//            print(self.two)
+//        })
         test = 2
         test = 34
         test = 444
